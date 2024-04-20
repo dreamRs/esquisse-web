@@ -22,7 +22,7 @@ home_ui <- function(id) {
       ),
       tags$p(
         tags$a(
-          "See on GitHub", phosphoricons::ph("github"),
+          "See the code on GitHub", phosphoricons::ph("github"),
           href = "https://github.com/dreamRs/esquisse/tree/master",
           target = "_blank",
           class = "text-secondary"
@@ -72,7 +72,7 @@ home_server <- function(id) {
     id,
     function(input, output, session) {
 
-      rv <- reactiveValues(data = NULL)
+      rv <- reactiveValues(data = list())
 
       from_file <- import_file_server(
         id = "file",
@@ -123,7 +123,7 @@ home_server <- function(id) {
           data = data,
           theme = "default",
           colwidths = "guess",
-          minBodyHeight = 400,
+          minBodyHeight = if (NROW(data) > 1) 400 else 50,
           summary = datamods:::construct_col_summary(data)
         ) %>%
           grid_columns(className = "font-monospace")
