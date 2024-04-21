@@ -14,7 +14,14 @@ application_ui <- function() {
         value = "esquisse",
         esquisse_ui(
           id = "esquisse",
-          header = esquisse_header(close = FALSE), # hide the close button
+          header = esquisse_header(
+            .before = actionButton(
+              inputId = "back_home",
+              label = ph("arrow-left", weight = "bold", title = "Back to home")
+            ),
+            import_data = FALSE,
+            close = FALSE
+          ),
           container = esquisse_container(fixed = TRUE),
           play_pause = FALSE,
           controls = c("settings", "labs", "axes", "geoms", "theme", "filters", "code", "export"),
@@ -31,6 +38,7 @@ application_server <- function(input, output, session) {
   data_r <- home_server("home")
 
   observeEvent(data_r(), nav_select("navset", "esquisse"))
+  observeEvent(input$back_home, nav_select("navset", "home"))
 
   esquisse_server(
     id = "esquisse",

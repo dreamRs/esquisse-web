@@ -52,7 +52,7 @@ home_ui <- function(id) {
           ),
           nav_spacer(),
           nav_panel(
-            title = "Demo dataset",
+            title = "Or use demo dataset",
             "Select a demo dataset:"
           )
         ),
