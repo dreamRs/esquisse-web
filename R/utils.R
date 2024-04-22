@@ -41,6 +41,8 @@ translations <- function(lang) {
     return(NULL)
   translations <- list(
     fr = list(
+      "Welcome to" = "Bienvenue sur",
+      "by" = "par",
       "Upload a file" = "Importer un fichier",
       "Copy/Paste data" = "Copier / Coller des données",
       "Import a Googlesheet" = "Importer une Googlesheet",
@@ -48,6 +50,8 @@ translations <- function(lang) {
       "Or use demo dataset" = "Ou utiliser des données de démo"
     ),
     de = list(
+      "Welcome to" = "Willkommen in",
+      "by" = "von",
       "Upload a file" = "Eine Datei hochladen",
       "Copy/Paste data" = "Daten kopieren/einfügen",
       "Import a Googlesheet" = "Ein Googlesheet importieren",

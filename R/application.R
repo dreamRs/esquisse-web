@@ -39,6 +39,14 @@ application_ui <- function(req) {
         value = "home",
         class = "bg-primary h-100",
         tags$div(
+          style = css(position = "absolute", top = "5px", left = "5px", zIndex = 10),
+          tags$a(
+            tags$img(src = "logo_dreamRs_couleur_blanc.png", style = css(height = "70px")),
+            href = "https://www.dreamrs.fr/",
+            target = "_blank"
+          )
+        ),
+        tags$div(
           style = css(position = "absolute", top = "5px", right = "20px", zIndex = 10),
           select_lang_input("lang", selected = lang)
         ),

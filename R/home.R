@@ -3,14 +3,26 @@ home_ui <- function(id) {
   ns <- NS(id)
   esquisse_container(fixed = TRUE)(
     class = "bg-primary overflow-auto",
+    id = ns("container"),
+    particles(config = "www/particlesjs-config.json", target_id = ns("container")),
+
     tags$div(
-      style = css(maxWidth = "1200px", margin = "auto"),
+      # style = css(maxWidth = "1200px", margin = "auto"),
+      style = css(
+        position = "absolute",
+        maxWidth = "1200px",
+        top = "20px",
+        left = 0,
+        right = 0,
+        margin = "auto"
+      ),
       tags$h1(
-        "Welcome to", "esquisse",
-        class = "text-center fw-bold text-secondary mt-5"
+        i18n_("Welcome to"), "Esquisse",
+        class = "text-center fw-bold text-secondary mt-5",
+        style = css(fontFamily = "'Annie Use Your Telescope', handwriting", fontSize = "3.5rem")
       ),
       tags$h3(
-        "by",
+        i18n_("by"),
         tags$a("dreamRs", href = "https://www.dreamrs.fr/", target = "_blank", class = "text-secondary"),
         class = "text-center text-secondary mb-3"
       ),
@@ -32,8 +44,8 @@ home_ui <- function(id) {
       card(
         fill = FALSE,
         navset_pill(
-          header = tags$br(),
-          footer = tags$br(),
+          header = tags$hr(),
+          # footer = tags$br(),
           nav_panel(
             title = i18n_("Upload a file"),
             import_file_ui(ns("file"), title = NULL, preview_data = FALSE)
