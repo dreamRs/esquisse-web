@@ -35,33 +35,29 @@ home_ui <- function(id) {
           header = tags$br(),
           footer = tags$br(),
           nav_panel(
-            title = "Upload a file",
+            title = i18n_("Upload a file"),
             import_file_ui(ns("file"), title = NULL, preview_data = FALSE)
           ),
           nav_panel(
-            title = "Copy/Paste data",
+            title = i18n_("Copy/Paste data"),
             import_copypaste_ui(ns("copypaste"), title = NULL)
           ),
           nav_panel(
-            title = "Import a Googlesheet",
+            title = i18n_("Import a Googlesheet"),
             import_googlesheets_ui(ns("googlesheets"), title = NULL)
           ),
           nav_panel(
-            title = "Read from URL",
+            title = i18n_("Read from URL"),
             import_url_ui(ns("url"), title = NULL)
           ),
           nav_spacer(),
           nav_panel(
-            title = "Or use demo dataset",
+            title = i18n_("Or use demo dataset"),
             "Select a demo dataset:"
           )
         ),
         datagridOutput2(outputId = ns("grid")),
-        actionButton(
-          inputId = ns("go"),
-          label = "Go to esquisse",
-          class = "btn-outline-primary w-100"
-        )
+        uiOutput(outputId = ns("container_go"))
       )
     )
   )
@@ -71,6 +67,8 @@ home_server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+
+      ns <- session$ns
 
       rv <- reactiveValues(data = list())
 
@@ -123,11 +121,29 @@ home_server <- function(id) {
           data = data,
           theme = "default",
           colwidths = "guess",
-          minBodyHeight = if (NROW(data) > 1) 400 else 50,
+          minBodyHeight = if (NROW(data) > 1) 400 else 30,
           summary = datamods:::construct_col_summary(data)
         ) %>%
           grid_columns(className = "font-monospace")
       })
+
+
+      output$container_go <- renderUI({
+        if (is.data.frame(rv$data) && nrow(rv$data) > 0) {
+          actionButton(
+            inputId = ns("go"),
+            label = tagList(ph("chart-scatter"), "Go to esquisse"),
+            class = "btn-outline-primary w-100"
+          )
+        } else {
+          actionButton(
+            inputId = ns("nogo"),
+            label = "Import data to continue",
+            class = "btn-outline-primary w-100 disabled"
+          )
+        }
+      })
+
 
       observeEvent(input$go, {
         rv$final_data <- rv$data

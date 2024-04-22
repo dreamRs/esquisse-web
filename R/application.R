@@ -7,12 +7,27 @@ application_ui <- function(req) {
     NULL
   }
   datamods::set_i18n(lang, packages = c("esquisse", "datamods"))
+  datamods::set_i18n(lang, packages = NULL)
   page_fluid(
     title = "esquisse web app",
-    theme = bs_theme_esquisse(),# |> bs_theme_update(bg = "#112446", fg = "#FFFFFF"),
+    theme = bs_theme_esquisse() |>
+      bs_add_rules(
+        c(
+          ".vscomp-toggle-button { @extend .btn }",
+          ".vscomp-toggle-button { @extend .btn-outline-primary }",
+          ".vscomp-toggle-button { @extend .text-start }",
+          ".vscomp-arrow::after { @extend .border-dark }",
+          ".vscomp-arrow::after { @extend .border-start-0 }",
+          ".vscomp-arrow::after { @extend .border-top-0 }",
+          ".vscomp-option:hover { @extend .bg-primary }",
+          ".vscomp-option  { @extend .bg-light }",
+          ".vscomp-search-wrapper { @extend .bg-light }",
+          ".vscomp-toggle-all-label { @extend .bg-light }"
+        )
+      ),
     busy_start_up(
       loader = spin_epic("self-building-square", color = "#FFF"),
-      mode = "timeout",
+      mode = "auto",
       timeout = 500,
       text = "Esquisse is loading...",
       color = "#FFF",
@@ -24,7 +39,7 @@ application_ui <- function(req) {
         value = "home",
         class = "bg-primary h-100",
         tags$div(
-          style = css(position = "absolute", top = "5px", right = "5px", zIndex = 10),
+          style = css(position = "absolute", top = "5px", right = "20px", zIndex = 10),
           select_lang_input("lang", selected = lang)
         ),
         home_ui("home")
