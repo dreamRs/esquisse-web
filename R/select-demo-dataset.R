@@ -20,6 +20,13 @@ select_demo_dataset_ui <- function(id) {
       good_for = c("histogram", "scatter plot", "bar plot", "boxplot"),
       source = "https://ggplot2.tidyverse.org/reference/mpg.html",
       inputId = ns("mpg")
+    ),
+    card_demo_dataset(
+      title = "Temperature data for France",
+      "This dataset contains smoothed temperature data for France over the period 2019-2024, including low, high and average for 2019-2023 period.",
+      good_for = c("line chart", "area chart"),
+      source = "https://data.enedis.fr",
+      inputId = ns("temperatures")
     )
   )
 }
@@ -39,6 +46,11 @@ select_demo_dataset_server <- function(id) {
       observeEvent(input$mpg, {
         rv$data <- ggplot2::mpg
         rv$name <- "ggplot2::mpg"
+      })
+
+      observeEvent(input$temperatures, {
+        rv$data <- readRDS("datas/temperatures.rds")
+        rv$name <- "temperatures"
       })
 
       return(list(
