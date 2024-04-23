@@ -65,7 +65,7 @@ home_ui <- function(id) {
           nav_spacer(),
           nav_panel(
             title = i18n_("Or use demo dataset"),
-            "Select a demo dataset:"
+            select_demo_dataset_ui(ns("demo"))
           )
         ),
         datagridOutput2(outputId = ns("grid")),
@@ -87,26 +87,25 @@ home_server <- function(id) {
       from_file <- import_file_server(
         id = "file",
         trigger_return = "change",
-        btn_show_data = FALSE,
-        reset = reactive(input$hidden)
+        btn_show_data = FALSE
       )
       from_copypaste <- import_copypaste_server(
         id = "copypaste",
         trigger_return = "change",
-        btn_show_data = FALSE,
-        reset = reactive(input$hidden)
+        btn_show_data = FALSE
       )
       from_googlesheets <- import_googlesheets_server(
         id = "googlesheets",
         trigger_return = "change",
-        btn_show_data = FALSE,
-        reset = reactive(input$hidden)
+        btn_show_data = FALSE
       )
       from_url <- import_url_server(
         id = "url",
         trigger_return = "change",
-        btn_show_data = FALSE,
-        reset = reactive(input$hidden)
+        btn_show_data = FALSE
+      )
+      from_demo <- select_demo_dataset_server(
+        id = "demo"
       )
 
       observeEvent(from_file$data(), {
@@ -124,6 +123,10 @@ home_server <- function(id) {
       observeEvent(from_url$data(), {
         rv$data <- from_url$data()
         rv$name <- from_url$name()
+      })
+      observeEvent(from_demo$data(), {
+        rv$data <- from_demo$data()
+        rv$name <- from_demo$name()
       })
 
 
