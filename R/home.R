@@ -1,6 +1,11 @@
 
-home_ui <- function(id) {
+home_ui <- function(id, lang = "en") {
   ns <- NS(id)
+  if (is.null(lang))
+    lang <- "en"
+  md_intro <- sprintf("md/%s.md", lang)
+  if (!file.exists(md_intro))
+    md_intro <- "md/en.md"
   esquisse_container(fixed = TRUE)(
     class = "bg-primary overflow-auto",
     id = ns("container"),
@@ -16,31 +21,7 @@ home_ui <- function(id) {
         right = 0,
         margin = "auto"
       ),
-      tags$h1(
-        i18n_("Welcome to"), "Esquisse",
-        class = "text-center fw-bold text-secondary mt-5",
-        style = css(fontFamily = "'Annie Use Your Telescope', handwriting", fontSize = "3.5rem")
-      ),
-      tags$h3(
-        i18n_("by"),
-        tags$a("dreamRs", href = "https://www.dreamrs.fr/", target = "_blank", class = "text-secondary"),
-        class = "text-center text-secondary mb-3"
-      ),
-      tags$p(
-        class = "text-center text-secondary fs-5 w-50 mx-auto mb-3",
-        "{esquisse} is an R package for creating graphs with {ggplot2},",
-        "allowing you to use esquisse directly online, without having to install the package.",
-        "Before creating a graph, you must first import data to be used to create a graph, or use a demo dataset."
-      ),
-      tags$p(
-        tags$a(
-          "See the code on GitHub", phosphoricons::ph("github"),
-          href = "https://github.com/dreamRs/esquisse/tree/master",
-          target = "_blank",
-          class = "text-secondary"
-        ),
-        class = "text-center fs-4 mb-5"
-      ),
+      includeMarkdown(md_intro),
       card(
         fill = FALSE,
         navset_pill(

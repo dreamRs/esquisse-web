@@ -10,23 +10,13 @@ application_ui <- function(req) {
   datamods::set_i18n(lang, packages = NULL)
   page_fluid(
     title = "esquisse web app",
-    theme = bs_theme_esquisse() |>
-      bs_add_rules(
-        c(
-          ".vscomp-toggle-button { @extend .btn }",
-          ".vscomp-toggle-button { @extend .btn-outline-primary }",
-          ".vscomp-toggle-button { @extend .text-start }",
-          ".vscomp-arrow::after { @extend .border-dark }",
-          ".vscomp-arrow::after { @extend .border-start-0 }",
-          ".vscomp-arrow::after { @extend .border-top-0 }",
-          ".vscomp-option:hover { @extend .bg-primary }",
-          ".vscomp-option  { @extend .bg-light }",
-          ".vscomp-search-wrapper { @extend .bg-light }",
-          ".vscomp-toggle-all-label { @extend .bg-light }"
-        )
-      ),
+    theme = theme_app(),
     busy_start_up(
-      loader = spin_epic("self-building-square", color = "#FFF"),
+      # loader = spin_epic("self-building-square", color = "#FFF"),
+      loader = tags$img(
+        src = "logo.png",
+        style = css(height = "200px")
+      ),
       mode = "auto",
       timeout = 500,
       text = "Esquisse is loading...",
@@ -50,7 +40,7 @@ application_ui <- function(req) {
           style = css(position = "absolute", top = "5px", right = "20px", zIndex = 10),
           select_lang_input("lang", selected = lang)
         ),
-        home_ui("home")
+        home_ui("home", lang = lang)
       ),
       nav_panel_hidden(
         value = "esquisse",
@@ -78,6 +68,7 @@ application_ui <- function(req) {
 application_server <- function(input, output, session) {
 
   observeEvent(input$lang, {
+    block_app()
     updateQueryString(queryString = sprintf("?lang=%s", input$lang))
     session$reload()
   }, ignoreInit = TRUE)

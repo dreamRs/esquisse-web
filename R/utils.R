@@ -1,82 +1,64 @@
 
-list_lang <- function() {
-  c("al", "br", "cn", "de", "es", "fr", "gb", "ja", "kr", "mk", "pl", "pt", "tr")
-}
+theme_app <- function() {
+  bs_theme_esquisse() |>
+    bs_add_rules(
+      c(
+        # Virtual Select
+        ".vscomp-toggle-button { @extend .btn }",
+        ".vscomp-toggle-button { @extend .btn-outline-primary }",
+        ".vscomp-toggle-button { @extend .text-start }",
+        ".vscomp-arrow::after { @extend .border-dark }",
+        ".vscomp-arrow::after { @extend .border-start-0 }",
+        ".vscomp-arrow::after { @extend .border-top-0 }",
+        ".vscomp-option:hover { @extend .bg-primary }",
+        ".vscomp-option  { @extend .bg-light }",
+        ".vscomp-search-wrapper { @extend .bg-light }",
+        ".vscomp-toggle-all-label { @extend .bg-light }",
 
-has_lang <- function(lang) {
-  isTRUE(lang %in% setdiff(list_lang(), c("br", "gb")))
-}
-
-select_lang_input <- function(inputId, selected = NULL) {
-  if (is.null(selected))
-    selected <- "gb"
-  choices <- lapply(
-    X = list_lang(),
-    FUN = function(value) {
-      label <- tags$div(
-        tags$img(src = sprintf("i18n/%s.svg", value), style = "height:16px;"),
-        value
+        # Title
+        ".title-app { @extend .text-center; @extend .fw-bold; @extend .text-secondary; @extend .mt-5 }",
+        ".title-app { font-family: 'Annie Use Your Telescope', handwriting; font-size: 3.5rem; }",
+        ".subtitle-app { @extend .text-center; @extend .text-secondary; @extend .mb-3 }",
+        ".introduction { @extend .text-center; @extend .text-secondary; @extend .fs-5; @extend .w-50; @extend .mx-auto; @extend .mb-3 }",
+        ".link-github { @extend .text-center; @extend .fs-4; @extend .mb-5 }"
       )
-      list(
-        label = htmltools::doRenderTags(label),
-        value = value
-      )
-    }
-  )
-  virtualSelectInput(
-    inputId = "lang",
-    label = NULL,
-    choices = choices,
-    selected = selected,
-    html = TRUE,
-    focusSelectedOptionOnOpen = FALSE,
-    width = "90px"
-  )
+    )
 }
 
 
 
-translations <- function(lang) {
-  if (is.null(lang))
-    return(NULL)
-  translations <- list(
-    fr = list(
-      "Welcome to" = "Bienvenue sur",
-      "by" = "par",
-      "Upload a file" = "Importer un fichier",
-      "Copy/Paste data" = "Copier / Coller des données",
-      "Import a Googlesheet" = "Importer une Googlesheet",
-      "Read from URL" = "Lire depuis une URL",
-      "Or use demo dataset" = "Ou utiliser des données de démo",
-      "Select a demo dataset:" = "Sélectionnez un jeu de données :",
-      "Source:" = "Source :",
-      "Good for:" = "Bien pour :",
-      "Select this dataset" = "Sélectionner ces données",
-      "Go to Esquisse" = "Continuer dans Esquisse",
-      "Import data to continue" = "Importez des données pour continuer"
-    ),
-    de = list(
-      "Welcome to" = "Willkommen in",
-      "by" = "von",
-      "Upload a file" = "Eine Datei hochladen",
-      "Copy/Paste data" = "Daten kopieren/einfügen",
-      "Import a Googlesheet" = "Ein Googlesheet importieren",
-      "Read from URL" = "Von URL lesen",
-      "Or use demo dataset" = "Oder verwenden Sie den Demo-Datensatz",
-      "Select a demo dataset:" = "Wählen Sie einen Demo-Datensatz aus:",
-      "Source:" = "Quelle :",
-      "Good for:" = "Gut für :",
-      "Select this dataset" = "Wählen Sie diesen Datensatz",
-      "Go to Esquisse" = "Go to Esquisse",
-      "Import data to continue" = "Daten importieren, um fortzufahren"
+block_app <- function() {
+  insertUI(
+    selector = "body",
+    ui = tags$div(
+      style = css(
+        backgroundColor = "#112446",
+        zIndex = 1500,
+        position = "fixed",
+        top = 0,
+        bottom = 0,
+        right = 0,
+        left = 0
+      ),
+      tags$div(
+        style = css(
+          position = "absolute",
+          width = "300px",
+          height = "220px",
+          color = "#FFF",
+          top = "50%",
+          left = "50%",
+          margin = "-110px 0 0 -150px",
+          padding = "20px",
+          borderRadius = "4px",
+          textAlign = "center"
+        ),
+        tags$img(
+          src = "logo.png",
+          style = css(height = "200px")
+        ),
+        "Reloading Esquisse..."
+      )
     )
   )
-  translations[[lang]]
 }
-
-i18n_ <- function(text) {
-  i18n(text, translations = translations(getOption("i18n")))
-}
-
-
-
