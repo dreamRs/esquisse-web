@@ -47,7 +47,13 @@ translations <- function(lang) {
       "Copy/Paste data" = "Copier / Coller des données",
       "Import a Googlesheet" = "Importer une Googlesheet",
       "Read from URL" = "Lire depuis une URL",
-      "Or use demo dataset" = "Ou utiliser des données de démo"
+      "Or use demo dataset" = "Ou utiliser des données de démo",
+      "Select a demo dataset:" = "Sélectionnez un jeu de données :",
+      "Source:" = "Source :",
+      "Good for:" = "Bien pour :",
+      "Select this dataset" = "Sélectionner ces données",
+      "Go to Esquisse" = "Continuer dans Esquisse",
+      "Import data to continue" = "Importez des données pour continuer"
     ),
     de = list(
       "Welcome to" = "Willkommen in",
@@ -56,7 +62,13 @@ translations <- function(lang) {
       "Copy/Paste data" = "Daten kopieren/einfügen",
       "Import a Googlesheet" = "Ein Googlesheet importieren",
       "Read from URL" = "Von URL lesen",
-      "Or use demo dataset" = "Oder verwenden Sie den Demo-Datensatz"
+      "Or use demo dataset" = "Oder verwenden Sie den Demo-Datensatz",
+      "Select a demo dataset:" = "Wählen Sie einen Demo-Datensatz aus:",
+      "Source:" = "Quelle :",
+      "Good for:" = "Gut für :",
+      "Select this dataset" = "Wählen Sie diesen Datensatz",
+      "Go to Esquisse" = "Go to Esquisse",
+      "Import data to continue" = "Daten importieren, um fortzufahren"
     )
   )
   translations[[lang]]

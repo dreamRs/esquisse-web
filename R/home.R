@@ -147,7 +147,7 @@ home_server <- function(id) {
         if (is.data.frame(rv$data) && nrow(rv$data) > 0) {
           actionButton(
             inputId = ns("go"),
-            label = tagList(ph("chart-scatter"), "Go to esquisse"),
+            label = tagList(ph("chart-scatter"), i18n_("Go to esquisse")),
             class = "btn-outline-primary w-100"
           )
         } else {

@@ -3,7 +3,7 @@
 select_demo_dataset_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    tags$h4("Select a demo dataset:"),
+    tags$h4(i18n_("Select a demo dataset:")),
     card_demo_dataset(
       title = "palmerpenguins: Palmer Archipelago (Antarctica) Penguin Data",
       "Size measurements, clutch observations, and blood isotope ratios for adult foraging Adélie, Chinstrap,",
@@ -62,16 +62,16 @@ card_demo_dataset <- function(title, ..., good_for = NULL, source = NULL, inputI
         fluidRow(
           column(
             width = 6,
-            tags$b(ph("thumbs-up"), "Good for:"), paste(good_for, collapse = ", "),
+            tags$b(ph("thumbs-up"), i18n_("Good for:")), paste(good_for, collapse = ", "),
             tags$br(),
-            tags$b(ph("link"), "Source:"), tags$a(source, href = source, target = "_blank")
+            tags$b(ph("link"), i18n_("Source:")), tags$a(source, href = source, target = "_blank")
           ),
           column(
             width = 6,
             class = "d-flex justify-content-end",
             actionButton(
               inputId = inputId,
-              label = tagList(ph("arrow-circle-right"), "Select this dataset"),
+              label = tagList(ph("arrow-circle-right"), i18n_("Select this dataset")),
               class = "btn-outline-primary"
             )
           )
