@@ -20,6 +20,7 @@ library(shinybusy)
 library(plotly)
 library(R.utils)
 library(particlesjs) # remotes::install_github("dreamRs/particlesjs")
+library(palmerpenguins)
 
 
 

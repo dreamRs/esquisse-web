@@ -1,0 +1,12 @@
+name: esquisse
+title: esquisse
+username: dreamrs
+account: dreamrs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11827740
+bundleId: 8529727
+url: https://dreamrs.shinyapps.io/esquisse/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
