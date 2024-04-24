@@ -25,9 +25,9 @@ names(population)[1:2] <- c("code_dep", "lib_dep")
 dep_sf <- charger_carte(COG = 2021, nivsupra = "DEP", geometrie_simplifiee = TRUE)
 
 population_fr <- left_join(
-  x = population,
-  y = dep_sf %>% select(-nom),
-  by = c("code_dep" = "DEP")
+  x = dep_sf %>% select(-nom),
+  y = population,
+  by = c("DEP" = "code_dep")
 )
 
 
