@@ -1,0 +1,82 @@
+/* TITLE, SUBTITLE & INTRO */
+.title-app {
+  @extend .text-center;
+  @extend .fw-bold;
+  @extend .text-secondary;
+  @extend .mt-5;
+}
+.title-app {
+  font-family: "Annie Use Your Telescope", handwriting;
+  font-size: 3.5rem;
+}
+.subtitle-app {
+  @extend .text-center;
+  @extend .text-secondary;
+  @extend .mb-3;
+}
+.introduction {
+  @extend .text-center;
+  @extend .text-secondary;
+  @extend .fs-5;
+  @extend .w-50;
+  @extend .mx-auto;
+  @extend .mb-3;
+}
+.link-github {
+  @extend .text-center;
+  @extend .fs-4;
+  @extend .mb-5;
+}
+
+/* CUSTOM VIRTUAL SELECT LOOK */
+
+.vscomp-toggle-button {
+  @extend .btn;
+}
+.vscomp-toggle-button {
+  @extend .btn-outline-primary;
+}
+.vscomp-toggle-button {
+  @extend .text-start;
+}
+.vscomp-arrow::after {
+  @extend .border-dark;
+}
+.vscomp-arrow::after {
+  @extend .border-start-0;
+}
+.vscomp-arrow::after {
+  @extend .border-top-0;
+}
+.vscomp-option:hover {
+  @extend .bg-primary;
+}
+.vscomp-option {
+  @extend .bg-light;
+}
+.vscomp-search-wrapper {
+  @extend .bg-light;
+}
+.vscomp-toggle-all-label {
+  @extend .bg-light;
+}
+
+/* HEX LOGO ANIM */
+.loader_hex {
+  height: 85px;
+  margin: 20px;
+}
+.loader_hex:nth-child(1) {
+  animation: animhex 0.9s ease-in-out alternate infinite;
+}
+.loader_hex:nth-child(2) {
+  animation: animhex 0.9s ease-in-out alternate 0.3s infinite;
+}
+.loader_hex:nth-child(3) {
+  animation: animhex 0.9s ease-in-out alternate 0.6s infinite;
+}
+@keyframes animhex {
+  100% {
+    transform: scale(2);
+  }
+}

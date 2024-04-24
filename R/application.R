@@ -12,14 +12,18 @@ application_ui <- function(req) {
     title = "esquisse web app",
     theme = theme_app(),
     busy_start_up(
-      # loader = spin_epic("self-building-square", color = "#FFF"),
-      loader = tags$img(
-        src = "logo.png",
-        style = css(height = "200px")
+      # loader = tags$img(
+      #   src = "logo.png",
+      #   style = css(height = "200px")
+      # ),
+      loader = tags$div(
+        tags$img(class = "loader_hex", src = "hex-esquisse.png"),
+        tags$img(class = "loader_hex", src = "hex-esquisse.png"),
+        tags$img(class = "loader_hex", src = "hex-esquisse.png")
       ),
       mode = "auto",
       timeout = 500,
-      text = "Esquisse is loading...",
+      text = i18n_("Loading Esquisse..."),
       color = "#FFF",
       background = "#112446"
     ),
