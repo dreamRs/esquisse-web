@@ -27,6 +27,13 @@ select_demo_dataset_ui <- function(id) {
       good_for = c("line chart", "area chart"),
       source = "https://data.enedis.fr",
       inputId = ns("temperatures")
+    ),
+    card_demo_dataset(
+      title = "French population by sex and age",
+      "This dataset contains smoothed temperature data for France over the period 2019-2024, including low, high and average for 2019-2023 period.",
+      good_for = c("line chart", "area chart"),
+      source = "https://www.insee.fr/fr/statistiques/2012692#tableau-TCRD_021_tab1_departements",
+      inputId = ns("population_fr")
     )
   )
 }
@@ -51,6 +58,11 @@ select_demo_dataset_server <- function(id) {
       observeEvent(input$temperatures, {
         rv$data <- readRDS("datas/temperatures.rds")
         rv$name <- "temperatures"
+      })
+
+      observeEvent(input$population_fr, {
+        rv$data <- readRDS("datas/population_fr.rds")
+        rv$name <- "population_fr"
       })
 
       return(list(
