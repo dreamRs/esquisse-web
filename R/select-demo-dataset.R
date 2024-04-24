@@ -30,8 +30,8 @@ select_demo_dataset_ui <- function(id) {
     ),
     card_demo_dataset(
       title = "French population by sex and age",
-      "This dataset contains smoothed temperature data for France over the period 2019-2024, including low, high and average for 2019-2023 period.",
-      good_for = c("line chart", "area chart"),
+      "Population estimates by sex and age on January 1ᵉʳ, 2024: departmental comparisons.",
+      good_for = c("maps", "histogram"),
       source = "https://www.insee.fr/fr/statistiques/2012692#tableau-TCRD_021_tab1_departements",
       inputId = ns("population_fr")
     )

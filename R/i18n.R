@@ -30,7 +30,7 @@ select_lang_input <- function(inputId, selected = NULL) {
     selected = selected,
     html = TRUE,
     focusSelectedOptionOnOpen = FALSE,
-    width = "90px"
+    width = "85px"
   )
 }
 
