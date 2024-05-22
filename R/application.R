@@ -51,6 +51,10 @@ application_ui <- function(req) {
               inputId = "back_home",
               label = ph("arrow-left", weight = "bold", title = "Back to home")
             ),
+            .after = actionButton(
+              inputId = "help",
+              label = ph("question", height = "1.6em", weight = "bold", title = "Help")
+            ),
             import_data = FALSE,
             close = FALSE
           ),
@@ -84,5 +88,10 @@ application_server <- function(input, output, session) {
     import_from = NULL
   )
 
+
+  observeEvent(input$help, {
+    show_modal_help("help")
+  })
+  help_server("help")
 }
 
