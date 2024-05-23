@@ -5,7 +5,7 @@ account: dreamrs
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11827740
-bundleId: 8622930
+bundleId: 8650852
 url: https://dreamrs.shinyapps.io/esquisse/
 version: 1
 asMultiple: FALSE
