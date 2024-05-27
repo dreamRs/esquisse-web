@@ -23,6 +23,7 @@ application_ui <- function(req) {
       color = "#FFF",
       background = "#112446"
     ),
+    useShinyjs(),
     navset_hidden(
       id = "navset",
       nav_panel_hidden(

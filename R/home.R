@@ -50,7 +50,7 @@ home_ui <- function(id, lang = "en") {
           )
         ),
         datagridOutput2(outputId = ns("grid")),
-        uiOutput(outputId = ns("container_go"))
+        uiOutput(outputId = ns("container_go"), class = "d-block")
       )
     )
   )
@@ -108,6 +108,10 @@ home_server <- function(id) {
       observeEvent(from_demo$data(), {
         rv$data <- from_demo$data()
         rv$name <- from_demo$name()
+        shinyjs::runjs(sprintf(
+          "document.getElementById('%s').scrollIntoView();",
+          session$ns("container_go")
+        ))
       })
 
 
