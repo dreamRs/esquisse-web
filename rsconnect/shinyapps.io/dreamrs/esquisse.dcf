@@ -5,9 +5,9 @@ account: dreamrs
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11827740
-bundleId: 8650852
+bundleId: 8673336
 url: https://dreamrs.shinyapps.io/esquisse/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: inputs/donnees-de-temperature-et-de-pseudo-rayonnement.csv|scripts/data-fr-population.R|scripts/data-temperatures.R
+ignoredFiles: scripts/data-fr-population.R|scripts/data-temperatures.R
