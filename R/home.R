@@ -133,7 +133,7 @@ home_server <- function(id) {
           actionButton(
             inputId = ns("go"),
             label = tagList(ph("chart-scatter"), i18n_("Go to esquisse")),
-            class = "btn-outline-primary w-100"
+            class = "btn-outline-primary btn-lg w-100"
           )
         } else {
           actionButton(
