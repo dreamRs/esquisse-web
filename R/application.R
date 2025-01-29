@@ -52,9 +52,24 @@ application_ui <- function(req) {
               inputId = "back_home",
               label = ph("arrow-left", weight = "bold", title = "Back to home")
             ),
-            .after = actionButton(
-              inputId = "help",
-              label = ph("question", height = "1.6em", weight = "bold", title = "Help")
+            .after = tagList(
+              actionButton(
+                inputId = "help",
+                label = ph("question", height = "1.6em", weight = "bold", title = "Help")
+              ),
+              actionButton(
+                inputId = "save_plot",
+                label = tagList(
+                  ph("floppy-disk", height = "1.6em", weight = "bold", title = "Save plot"),
+                  "Save plot"
+                ),
+                class = "border border-white mx-1 pt-1"
+              ),
+              actionButton(
+                inputId = "go_to_history",
+                label = ph("arrow-right", height = "1.6em", weight = "bold", title = "Go to history"),
+                class = "border border-white mx-1"
+              )
             ),
             import_data = FALSE,
             close = FALSE
@@ -64,6 +79,11 @@ application_ui <- function(req) {
           controls = c("options", "labs", "axes", "geoms", "theme", "filters", "code", "export"),
           layout_sidebar = TRUE
         )
+      ),
+      nav_panel_hidden(
+        value = "history",
+        tags$h2("Plot history", class = "text-center my-3"),
+        save_multi_ggplot_ui("history")
       )
     )
   )
@@ -71,6 +91,8 @@ application_ui <- function(req) {
 
 
 application_server <- function(input, output, session) {
+
+  rv <- reactiveValues(plot_list = list())
 
   observeEvent(input$lang, {
     block_app()
@@ -83,12 +105,30 @@ application_server <- function(input, output, session) {
   observeEvent(data_r(), nav_select("navset", "esquisse"))
   observeEvent(input$back_home, nav_select("navset", "home"))
 
-  esquisse_server(
+  res_esquisse <- esquisse_server(
     id = "esquisse",
     data_rv = data_r,
     import_from = NULL
   )
 
+  observeEvent(input$save_plot, show_modal_save_plot())
+  observeEvent(input$save_this_plot, {
+    # print(str(reactiveValuesToList(res_esquisse)))
+    rv$plot_list[[length(rv$plot_list) + 1]] <- list(
+      label = input$plot_label,
+      code = res_esquisse$code_plot,
+      ggobj = res_esquisse$ggobj
+    )
+    removeModal()
+  })
+  observeEvent(input$go_to_history, nav_select("navset", "history"))
+  save_multi_ggplot_server(
+    id = "history",
+    plot_list_r = reactive({
+      req(rv$plot_list)
+      rv$plot_list
+    })
+  )
 
   observeEvent(input$help, {
     show_modal_help("help")
