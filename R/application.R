@@ -50,7 +50,11 @@ application_ui <- function(req) {
           header = esquisse_header(
             .before = actionButton(
               inputId = "back_home",
-              label = ph("arrow-left", weight = "bold", title = "Back to home")
+              label = tagList(
+                ph("arrow-left", weight = "bold", title = "Back to home"),
+                "Go to data tab"
+              ),
+              class = "border border-white border-2 mx-1"
             ),
             .after = tagList(
               actionButton(
@@ -63,12 +67,15 @@ application_ui <- function(req) {
                   ph("floppy-disk", height = "1.6em", weight = "bold", title = "Save plot"),
                   "Save plot"
                 ),
-                class = "border border-white mx-1 pt-1"
+                class = "border border-white border-2 mx-1 pt-1"
               ),
               actionButton(
                 inputId = "go_to_history",
-                label = ph("arrow-right", height = "1.6em", weight = "bold", title = "Go to history"),
-                class = "border border-white mx-1"
+                label = tagList(
+                  "Go to history tab",
+                  ph("arrow-right", weight = "bold", title = "Go to history")
+                ),
+                class = "border border-white border-2 mx-1"
               )
             ),
             import_data = FALSE,
@@ -82,8 +89,18 @@ application_ui <- function(req) {
       ),
       nav_panel_hidden(
         value = "history",
-        tags$h2("Plot history", class = "text-center my-3"),
-        save_multi_ggplot_ui("history")
+        tags$div(
+          style = css(position = "absolute", top = "5px", left = "12px", zIndex = 10),
+          actionButton(
+            inputId = "back_to_esquisse",
+            label = tagList(
+              ph("arrow-left", weight = "bold", title = "Back to home"),
+              "Back to esquisse"
+            ),
+            class = "border border-white border-2 mx-1"
+          )
+        ),
+        history_ui("history")
       )
     )
   )
@@ -122,13 +139,15 @@ application_server <- function(input, output, session) {
     removeModal()
   })
   observeEvent(input$go_to_history, nav_select("navset", "history"))
-  save_multi_ggplot_server(
+
+  history_server(
     id = "history",
     plot_list_r = reactive({
       req(rv$plot_list)
       rv$plot_list
     })
   )
+  observeEvent(input$back_to_esquisse, nav_select("navset", "esquisse"))
 
   observeEvent(input$help, {
     show_modal_help("help")
