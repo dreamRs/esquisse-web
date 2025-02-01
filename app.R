@@ -25,6 +25,7 @@ library(palmerpenguins)
 library(markdown)
 library(sf)
 library(officer)
+library(styler)
 
 
 

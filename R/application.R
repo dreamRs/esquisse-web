@@ -110,6 +110,7 @@ application_ui <- function(req) {
 application_server <- function(input, output, session) {
 
   rv <- reactiveValues(plot_list = list())
+  data_rv <- reactiveValues(data = NULL, name = NULL)
 
   observeEvent(input$lang, {
     block_app()
@@ -122,18 +123,26 @@ application_server <- function(input, output, session) {
   observeEvent(data_r(), nav_select("navset", "esquisse"))
   observeEvent(input$back_home, nav_select("navset", "home"))
 
+  observeEvent(data_r(), {
+    data_rv$data <- data_r()
+    data_rv$name <- attr(data_r(), "name")
+  })
+
   res_esquisse <- esquisse_server(
     id = "esquisse",
-    data_rv = data_r,
+    data_rv = data_rv,
     import_from = NULL
   )
 
   observeEvent(input$save_plot, show_modal_save_plot())
   observeEvent(input$save_this_plot, {
-    # print(str(reactiveValuesToList(res_esquisse)))
     rv$plot_list[[length(rv$plot_list) + 1]] <- list(
       label = input$plot_label,
-      code = res_esquisse$code_plot,
+      code = merge_codes(
+        code_plot = res_esquisse$code_plot,
+        code_filters = res_esquisse$code_filters,
+        nm_dat = attr(data_r(), "name")
+      ),
       ggobj = res_esquisse$ggobj
     )
     removeModal()

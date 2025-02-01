@@ -43,3 +43,18 @@ block_app <- function() {
     )
   )
 }
+
+
+merge_codes <- function(code_plot, code_filters, nm_dat = "data") {
+  # browser()
+  if (identical(code_filters, nm_dat))
+    return(code_plot)
+  code <- gsub(
+    x = code_plot,
+    replacement = " ggplot()",
+    pattern = sprintf("ggplot(%s)", nm_dat),
+    fixed = TRUE
+  )
+  code <- paste(code_filters, code, sep = " %>%\n")
+  paste(as.character(style_text(code)), collapse = "\n")
+}

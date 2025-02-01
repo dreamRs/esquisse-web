@@ -147,6 +147,7 @@ home_server <- function(id) {
 
       observeEvent(input$go, {
         rv$final_data <- rv$data
+        attr(rv$final_data, "name") <- rv$name
       })
 
       return(reactive(rv$final_data))
