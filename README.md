@@ -35,6 +35,11 @@ Create graphics by dragging variables into aesthetics boxes.
 
 ![](www/esquisse-graphics.png)
 
+Save the graphs you want to find them in the history tab.
+
 
 ### Export graphics and code
 
+All saved graphics are available here, you export the ones you want and retrieve their code.
+
+![](www/esquisse-history.png)
