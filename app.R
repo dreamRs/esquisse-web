@@ -27,6 +27,7 @@ library(sf)
 library(officer)
 library(styler)
 
+options(shiny.maxRequestSize = 15*1024^2)
 
 
 # R -----------------------------------------------------------------------

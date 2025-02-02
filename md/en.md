@@ -4,7 +4,16 @@
 <h3 class="subtitle-app">
   by
   <a href="https://www.dreamrs.fr/" target="_blank" class="text-secondary">dreamRs</a>
+  &#x2014;
+  <a href="mailto:info@dreamrs.fr" class="contact-link">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 256 256" class="phosphor-svg" height="1.33em" fill="currentColor" style="vertical-align:-0.25em;">
+      <path d="M224,50H32a6,6,0,0,0-6,6V192a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V56A6,6,0,0,0,224,50Zm-96,85.86L47.42,62H208.58ZM101.67,128,38,186.36V69.64Zm8.88,8.14L124,148.42a6,6,0,0,0,8.1,0l13.4-12.28L208.58,194H47.43ZM154.33,128,218,69.64V186.36Z"></path>
+      <title>Contact us</title>
+    </svg>
+    Contact us
+  </a>
 </h3>
+
 
 <p class="introduction">
   {esquisse} is an R package, available on <a href="https://cran.r-project.org/package=esquisse" target="_blank" class="text-secondary">CRAN</a>, for creating graphs with {ggplot2}, this app allow you to use esquisse directly online, without having to install the package.

@@ -3,7 +3,7 @@
   @extend .text-center;
   @extend .fw-bold;
   @extend .text-secondary;
-  @extend .mt-5;
+  @extend .mt-4;
 }
 .title-app {
   font-family: "Annie Use Your Telescope", handwriting;
@@ -12,15 +12,19 @@
 .subtitle-app {
   @extend .text-center;
   @extend .text-secondary;
-  @extend .mb-3;
+  @extend .mb-2;
+}
+.contact-link {
+  @extend .text-secondary;
+  font-size: smaller;
 }
 .introduction {
   @extend .text-center;
   @extend .text-secondary;
   @extend .fs-5;
-  @extend .w-50;
+  @extend .w-75;
   @extend .mx-auto;
-  @extend .mb-3;
+  @extend .mb-2;
 }
 .link-github {
   @extend .text-center;
