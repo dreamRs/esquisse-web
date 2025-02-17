@@ -91,14 +91,7 @@ application_ui <- function(req) {
         value = "history",
         tags$div(
           style = css(position = "absolute", top = "5px", left = "12px", zIndex = 10),
-          actionButton(
-            inputId = "back_to_esquisse",
-            label = tagList(
-              ph("arrow-left", weight = "bold", title = "Back to home"),
-              "Back to esquisse"
-            ),
-            class = "border border-white border-2 mx-1"
-          )
+          
         ),
         history_ui("history")
       )
@@ -149,18 +142,16 @@ application_server <- function(input, output, session) {
   })
   observeEvent(input$go_to_history, nav_select("navset", "history"))
 
-  history_server(
+  res_history <- history_server(
     id = "history",
     plot_list_r = reactive({
       req(rv$plot_list)
       rv$plot_list
     })
   )
-  observeEvent(input$back_to_esquisse, nav_select("navset", "esquisse"))
+  observeEvent(res_history$back_to_esquisse(), nav_select("navset", "esquisse"))
 
-  observeEvent(input$help, {
-    show_modal_help("help")
-  })
+  observeEvent(input$help, show_modal_help("help"))
   help_server("help")
 }
 
