@@ -43,3 +43,15 @@ Save the graphs you want to find them in the history tab.
 All saved graphics are available here, you export the ones you want and retrieve their code.
 
 ![](www/esquisse-history.png)
+
+
+
+## Development
+
+To run the application locally, first clone this repo, then in R run:
+
+```r
+renv::restore()
+shiny::runApp()
+```
+
