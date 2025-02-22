@@ -58,3 +58,27 @@ merge_codes <- function(code_plot, code_filters, nm_dat = "data") {
   code <- paste(code_filters, code, sep = " %>%\n")
   paste(as.character(style_text(code)), collapse = "\n")
 }
+
+
+
+show_modal_color_blindness <- function(ggobj) {
+  showModal(modalDialog(
+    title = tagList(
+      "Check color blindness", datamods:::button_close_modal()
+    ),
+    size = "xl",
+    easyClose = TRUE,
+    footer = NULL,
+    tags$p(
+      "Color blindness is color vision deficiency, which means people with color blindness may be not aware of differences",
+      "among colors that are obvious to the people without it.",
+      "Output below is rendered via the Color vision deficiency (CVD) simulator from package",
+      tags$a("colorBlindness", href = "https://cran.r-project.org/package=colorBlindness", target = "_blank")
+    ),
+    renderPlot({
+      cvdPlot(ggobj)
+    }, height = 600)
+  ))
+}
+
+

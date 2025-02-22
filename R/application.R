@@ -62,6 +62,14 @@ application_ui <- function(req) {
                 label = ph("question", height = "1.6em", weight = "bold", title = "Help")
               ),
               actionButton(
+                inputId = "check_colorblindness",
+                label = tagList(
+                  ph("eye", height = "1.6em", weight = "bold", title = "Check color blindness"),
+                  "Check color blindness"
+                ),
+                class = "border border-white border-2 mx-1 pt-1"
+              ),
+              actionButton(
                 inputId = "save_plot",
                 label = tagList(
                   ph("floppy-disk", height = "1.6em", weight = "bold", title = "Save plot"),
@@ -91,7 +99,7 @@ application_ui <- function(req) {
         value = "history",
         tags$div(
           style = css(position = "absolute", top = "5px", left = "12px", zIndex = 10),
-          
+
         ),
         history_ui("history")
       )
@@ -126,6 +134,10 @@ application_server <- function(input, output, session) {
     data_rv = data_rv,
     import_from = NULL
   )
+
+  observeEvent(input$check_colorblindness, {
+    show_modal_color_blindness(res_esquisse$ggobj)
+  })
 
   observeEvent(input$save_plot, show_modal_save_plot())
   observeEvent(input$save_this_plot, {

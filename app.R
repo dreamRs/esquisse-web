@@ -26,6 +26,7 @@ library(markdown)
 library(sf)
 library(officer)
 library(styler)
+library(colorBlindness)
 
 options(shiny.maxRequestSize = 15*1024^2)
 
