@@ -16,7 +16,7 @@ home_ui <- function(id, lang = "en") {
       style = css(
         position = "absolute",
         maxWidth = "1200px",
-        top = "20px",
+        top = 0,
         left = 0,
         right = 0,
         margin = "auto"
@@ -49,8 +49,8 @@ home_ui <- function(id, lang = "en") {
             select_demo_dataset_ui(ns("demo"))
           )
         ),
-        datagridOutput2(outputId = ns("grid")),
-        uiOutput(outputId = ns("container_go"), class = "d-block")
+        uiOutput(outputId = ns("container_go"), class = "d-block"),
+        datagridOutput2(outputId = ns("grid"))
       )
     )
   )
@@ -130,10 +130,16 @@ home_server <- function(id) {
 
       output$container_go <- renderUI({
         if (is.data.frame(rv$data) && nrow(rv$data) > 0) {
-          actionButton(
-            inputId = ns("go"),
-            label = tagList(ph("chart-scatter"), i18n_("Go to esquisse")),
-            class = "btn-outline-primary btn-lg w-100"
+          tagList(
+            actionButton(
+              inputId = ns("go"),
+              label = tagList(
+                ph("chart-scatter", weight = "regular", title = i18n_("Go to esquisse")),
+                i18n_("Go to esquisse")
+              ),
+              class = "btn-primary btn-lg w-100 mb-2 fw-bold"
+            ),
+            tags$b("Imported data:")
           )
         } else {
           actionButton(
